@@ -1,0 +1,132 @@
+.question {
+  display: grid;
+  grid-gap: 10px;
+  justify-content: left;
+  background-color: #e1f9bb;
+  grid-template-columns: auto auto auto;
+  padding: 20px 20px;
+  margin: 30px 30px;
+  
+}
+.question-item {
+ /* background-color: rgba(255, 255, 255, 0.8); */
+ width: 300px;
+ /* text-align: center; */
+ /* padding: 20px; */
+ /* font-size: 30px; */
+}
+
+.diagram {
+ grid-column: 1;
+ /* border: solid black 2px; */
+ grid-row: 1;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+}
+.delete-btn {
+  grid-row: 2;
+  grid-column: 2;
+}
+.edit-btn {
+  grid-row: 2;
+  grid-column: 1;
+}
+.title-question {
+ /* border: solid black 2px; */
+ color: crimson;
+ font-weight: bold;
+ grid-column: 2;
+ grid-row: 1;
+}
+b {
+ color : black;
+}
+.difficulty {
+ grid-column: 3 ;
+ grid-row: 1;
+}
+.img {
+ width: min-content;
+}
+@media only screen and (max-width: 999px) {
+  .question {
+    width : 550px;
+    margin: 10px 0;
+  }
+ .question-item {
+   width : 250px !important;
+ }
+ .title-question {
+  grid-column: 2 !important;
+  word-break: break-all;
+ }
+
+ /* .diagram {
+  width: 50px;
+ } */
+ img {
+  width: 150px !important;
+  border: solid red 3px;
+ }
+}
+@media only screen and (max-width: 770px) {
+  .question {
+    width : 350px;
+    margin: 10px 0;
+  }
+ .question-item {
+   width : 150px !important;
+ }
+ .title-question {
+  grid-column: 2 !important;
+  word-break: break-all;
+ }
+
+ /* .diagram {
+  width: 50px;
+ } */
+ img {
+  width: 150px !important;
+  border: solid red 3px;
+ }
+}
+@media only screen and (max-width: 450px) {
+  .question {
+    width : 315px;
+    margin: 10px 0;
+  }
+ .question-item {
+   width : 125px !important;
+ }
+ .title-question {
+  word-break: break-all;
+ }
+ /* .diagram {
+  width: 50px;
+ } */
+ img {
+  width: 125px !important;
+  border: solid red 3px;
+ }
+}
+@media only screen and (max-width: 1024px) {
+ .question-item {
+  width: 240px;
+ }
+ .title-question {
+  grid-column: 3;
+  word-break: break-all;
+ }
+ /* .diagram {
+  width: 50px;
+ } */
+ img {
+  width: 215px;
+ }
+}
+@media only screen and (min-width : 1025px) {
+ img {
+  max-width : 260px;
+ }
+}

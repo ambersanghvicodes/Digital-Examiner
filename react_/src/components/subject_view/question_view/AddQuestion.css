@@ -1,0 +1,28 @@
+.question-form {
+ background-color: darkgray;
+ padding: 20px 50px;
+ margin: 20px 60px;
+}
+/* 
+.question-name {
+ grid-column: 1 / span 3;
+ grid-row: 1;
+}
+.mark {
+ grid-column: 1 / span 3;
+ grid-row: 2;
+}
+
+.select {
+ grid-row: 3;
+ grid-column: 2;
+}
+.file {
+ grid-row: 4;
+ grid-column: 2;
+}
+
+.button {
+ grid-row: 5;
+ grid-column: 2;
+} */

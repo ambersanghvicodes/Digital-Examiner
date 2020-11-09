@@ -1,0 +1,37 @@
+.subjectItem {
+  color: black;
+  justify-content: center;
+  font-weight: bolder;
+  background-color: rgb(125, 208, 241);
+  text-align: center;
+  border: solid black;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  margin: 10px 10px;
+  padding: 20px 50px;
+  transition: 0.3s linear;
+}
+.span {
+  color: white;
+  border-radius: 15%;
+  padding: 5px 10px;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+  background-color: #fa4b6a;
+  transition: 0.5s ease;
+}
+.span:hover {
+  padding : 5px 15px;
+}
+.subjectItem:hover {
+  border-left-width: 15px;
+  border-right-width: 15px;
+  border-left-color: royalblue;
+  border-right-color: royalblue;
+  background-color: #c2dde6;
+}
+.subjectItem input {
+  color: black;
+  font-weight: bold;
+}

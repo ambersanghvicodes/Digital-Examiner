@@ -1,0 +1,10 @@
+.subjects {
+ display:flex;
+ flex-wrap: wrap;
+ justify-content: space-evenly;
+}
+/* .subjects {
+ float:center;
+ margin:auto;
+ width: 50%;
+} */
