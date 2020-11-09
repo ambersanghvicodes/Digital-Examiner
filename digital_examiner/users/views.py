@@ -10,11 +10,13 @@ from .models import  Subject, Questions, Todo
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication , TokenAuthentication
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication , TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsAuthenticatedAndOwner, IsAuthenticatedAndOwner1
+# from .permissions import IsAuthenticatedAndOwner, IsAuthenticatedAndOwner1
 
-
+# oauth toolkit
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
+from oauth2_provider.contrib.rest_framework import OAuth2Authentication
 
 
 class TodoList(generics.ListCreateAPIView):
@@ -32,8 +34,8 @@ class TodoEdit(generics.RetrieveUpdateDestroyAPIView):
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
 
     
 
@@ -55,7 +57,7 @@ class UserCreate(generics.CreateAPIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserEditSerializer
-    authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
 
@@ -63,8 +65,9 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class SubjectList(generics.ListCreateAPIView):
     serializer_class = SubjectSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
+
 
     def get_queryset(self):
         return Subject.objects.all().filter(user = self.request.user)
@@ -75,8 +78,8 @@ class SubjectList(generics.ListCreateAPIView):
 class SubjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
 
 @api_view(['GET', 'POST'])
 def question_list(request, pk):
@@ -104,9 +107,9 @@ class QuestionList(generics.ListCreateAPIView):
     parser_class = (FileUploadParser, )
     serializer_class = QuestionSerializer
     lookup_url_kwarg = "pk"
-    authentication_classes = (TokenAuthentication,BasicAuthentication, SessionAuthentication)
-
-    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication,BasicAuthentication, SessionAuthentication)
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
 
 
     def get_queryset(self):
@@ -124,9 +127,8 @@ class QuestionList(generics.ListCreateAPIView):
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Questions.objects.all()
     serializer_class = QuestionSerializer
-    authentication_classes = (TokenAuthentication,)
-
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
     lookup_field = "id"
 
 

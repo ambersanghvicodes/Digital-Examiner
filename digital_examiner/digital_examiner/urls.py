@@ -20,12 +20,15 @@ from django.conf.urls.static import static
 from .views import CustomObtainAuthToken
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
+    # path('accounts/', include('allauth.urls')),
     path('api_view/', include('users.urls')),
-    path('rest_auth/login/',CustomObtainAuthToken.as_view()),
-    path('rest_auth/',include('rest_auth.urls')),
-    path('rest_auth/registration/', include('rest_auth.registration.urls')),
+    # path('rest_auth/login/',CustomObtainAuthToken.as_view()),
+    # path('rest_auth/',include('rest_auth.urls')),
+    # path('rest_auth/registration/', include('rest_auth.registration.urls')),
+    path('auth/', include('drf_social_oauth2.urls', namespace='drf')),
 
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    # path('rest_auth/')
 ]
 
 
