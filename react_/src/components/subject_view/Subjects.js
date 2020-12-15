@@ -62,7 +62,6 @@ class Subjects extends Component {
       <div>
         {this.props.userLoggedIn ? (
           <div>
-            <br />
             <h1
               style={{
                 textAlign: "center",

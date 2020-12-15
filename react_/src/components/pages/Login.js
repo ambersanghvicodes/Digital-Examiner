@@ -58,7 +58,7 @@ class NormalLoginForm extends React.Component {
     if (this.props.error) {
       errorMessage = (
         <Alert style={{ textAlign: "center" }} variant="danger">
-          {this.props.error.response.data.non_field_errors}
+          {this.props.error.response.data.error_description}
         </Alert>
       );
     }
@@ -70,27 +70,29 @@ class NormalLoginForm extends React.Component {
       console.log(response);
       this.props.onGoogleLogin(response.accessToken);
     };
-    const responseFailed = () =>{
-
-    }
+    const responseFailed = () => {};
 
     // const { getFieldDecorator } = this.props.form;
     return (
       <div>
         {console.log(this.props)}
+        <br />
+        <br />
         {this.props.isAuthenticated ? (
           <React.Fragment>
             {window.alert("Already Logged in. Visit home")}
             <Redirect to="/" />
           </React.Fragment>
         ) : (
-          <div
-            style={{ padding: "10% 2px 10% 2px", backgroundColor: "skyblue" }}
-          >
-            <center>
-              <Card bg={"dark"} text={"white"} className="mb-2 login-card">
-                <Card.Body>
+          <>
+            <div className="outer-box">
+              <div className="inner-box">
+                <center>
+                  <h1 className="sign-in">
+                    Sign In Here <i className="fa fa-sign-in" />{" "}
+                  </h1>
                   {errorMessage}
+                  <br />
                   {this.props.loading ? (
                     <React.Fragment>
                       <h1 style={{ color: "white" }}>Logging In...</h1>
@@ -100,76 +102,116 @@ class NormalLoginForm extends React.Component {
                       </Spinner>
                     </React.Fragment>
                   ) : (
-                    <div>
-                      <h1 className="heading" style={{ color: "white" }}>
-                        Login Here
-                      </h1>
-                      <br />
-                      <Form onSubmit={this.handleSubmit}>
-                        <center>
-                          <Form.Group
-                            as={Row}
-                            className="justify-content-md-center"
-                            controlId="formBasicUsername"
-                          >
-                            <Form.Label>Username:{"  "}</Form.Label>
-                            <Col xs lg="6">
-                              <Form.Control
-                                type="text"
-                                name="username"
-                                value={this.state.values.username}
-                                onChange={this.inputChanged}
-                                placeholder="Enter your Username"
-                              />
-                            </Col>
-                          </Form.Group>
-
-                          <Form.Group
-                            as={Row}
-                            className="justify-content-md-center"
-                            controlId="formBasicPassword"
-                          >
-                            <Form.Label>Password: </Form.Label>
-                            <Col xs lg="6">
-                              <Form.Control
-                                name="password"
-                                type="password"
-                                onChange={this.inputChanged}
-                                value={this.state.values.password}
-                                placeholder="Password"
-                              />
-                            </Col>
-                          </Form.Group>
-                        </center>
-                        <Button
-                          variant="primary"
-                          className="login-btn"
-                          type="submit"
-                        >
-                          Login
-                        </Button>
-                        {"   "}
-                        or {"  "}{" "}
-                        <Link to="/signup" className="borderLeftRight">
-                          Register
-                        </Link>
-                      </Form>
+                    <>
                       <FacebookLogin
                         appId="3671519843015368"
                         fields="name,email"
                         callback={responseFacebook}
-                      />
+                      />{" "}
+                      {"\u00A0"}
                       <GoogleLogin
-                        clientId = '960607237094-ep41988jj6prp3gubiu4vq78gld9nqr4.apps.googleusercontent.com'
-                        onSuccess ={responseGoogle}
-                        onFailure = {responseFailed}
+                        clientId="960607237094-ep41988jj6prp3gubiu4vq78gld9nqr4.apps.googleusercontent.com"
+                        onSuccess={responseGoogle}
+                        onFailure={responseFailed}
                       />
-                    </div>
+                      <br />
+                      <br />
+                      <form className="lgn-form" onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                          <div className="input-group input-group-lg">
+                            <div className="input-group-prepend">
+                              <span className="input-group-text lgn-icon">
+                                <i className="fa fa-user"></i>
+                              </span>
+                            </div>
+                            <input
+                              type="username"
+                              name="username"
+                              value={this.state.values.username}
+                              onChange={this.inputChanged}
+                              placeholder="Enter your Username"
+                              style={{
+                                borderColor: "transparent",
+                                borderTopRightRadius: "2rem",
+                                borderBottomRightRadius: "2rem",
+                                borderBottomColor: "grey",
+                              }}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="input-group input-group-lg">
+                            <div className="input-group-prepend">
+                              <span className="input-group-text lgn-icon">
+                                <i className="fa fa-lock "></i>
+                              </span>
+                            </div>
+                            <input
+                              type="password"
+                              name="password"
+                              onChange={this.inputChanged}
+                              value={this.state.values.password}
+                              placeholder="Password"
+                              style={{
+                                borderColor: "transparent",
+                                borderTopRightRadius: "2rem",
+                                borderBottomRightRadius: "2rem",
+                                borderBottomColor: "grey",
+                              }}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        <p style={{ margin: "0 10%" }}>
+                          <input
+                            type="submit"
+                            value="Submit"
+                            style={{ borderRadius: "11%" }}
+                            className="btn btn-success btn-block btn-lg"
+                          />{" "}
+                          <br /> or {"  "}{" "}
+                          <Link to="/signup" className="borderLeftRight">
+                            Register
+                          </Link>
+                        </p>
+                        <br />
+                      </form>
+                    </>
                   )}
-                </Card.Body>
-              </Card>
-            </center>
-          </div>
+                </center>
+              </div>
+            </div>
+            {/* <div
+              style={{ padding: "10% 2px 10% 2px", backgroundColor: "skyblue" }}
+            >
+              <center>
+                <Card bg={"dark"} text={"white"} className="mb-2 login-card">
+                  <Card.Body>
+                    {errorMessage}
+                    {this.props.loading ? (
+                      <React.Fragment>
+                        <h1 style={{ color: "white" }}>Logging In...</h1>
+                        <br />
+                        <Spinner animation="border" role="status">
+                          <span className="sr-only">Loading...</span>
+                        </Spinner>
+                      </React.Fragment>
+                    ) : (
+                      <div>
+                        <h1 className="heading" style={{ color: "white" }}>
+                          Login Here
+                        </h1>
+                        <br />
+
+                        <br />
+                      </div>
+                    )}
+                  </Card.Body>
+                </Card>
+              </center>
+            </div> */}
+          </>
         )}
       </div>
     );
@@ -193,11 +235,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.authLogin(username, password)),
     onFacebookLogin: (accessToken) =>
       dispatch(actions.facebookLogin(accessToken)),
-    onGoogleLogin: (accessToken) =>
-      dispatch(actions.googleLogin(accessToken)),
+    onGoogleLogin: (accessToken) => dispatch(actions.googleLogin(accessToken)),
   };
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NormalLoginForm);
 
@@ -289,3 +329,48 @@ export default connect(mapStateToProps, mapDispatchToProps)(NormalLoginForm);
 //     </Form>
 //   </div>
 // )}
+
+// <Form onSubmit={this.handleSubmit}>
+//                           <center>
+//                             <Form.Group
+//                               as={Row}
+//                               className="justify-content-md-center"
+//                               controlId="formBasicUsername"
+//                             >
+//                               <Form.Label>Username:{"  "}</Form.Label>
+//                               <Col xs lg="6">
+//                                 <Form.Control
+//                                   type="text"
+//                                   name="username"
+//                                   value={this.state.values.username}
+//                                   onChange={this.inputChanged}
+//                                   placeholder="Enter your Username"
+//                                 />
+//                               </Col>
+//                             </Form.Group>
+
+//                             <Form.Group
+//                               as={Row}
+//                               className="justify-content-md-center"
+//                               controlId="formBasicPassword"
+//                             >
+//                               <Form.Label>Password: </Form.Label>
+//                               <Col xs lg="6">
+//                                 <Form.Control
+//                                   name="password"
+//                                   type="password"
+//                                   onChange={this.inputChanged}
+//                                   value={this.state.values.password}
+//                                   placeholder="Password"
+//                                 />
+//                               </Col>
+//                             </Form.Group>
+//                           </center>
+//                           <Button
+//                             variant="primary"
+//                             className="login-btn"
+//                             type="submit"
+//                           >
+//                             Login
+//                           </Button>
+//                         </Form>

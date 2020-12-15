@@ -9,6 +9,8 @@ class Logout extends Component {
  render() {
   return (
    <div>
+        <br/><br/>
+
     Logout Successfull......!
    </div>
   )

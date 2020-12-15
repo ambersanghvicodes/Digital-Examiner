@@ -3,6 +3,36 @@
  padding: 20px 50px;
  margin: 20px 60px;
 }
+.OuterCard {
+ display: flex;
+ justify-content: center;
+ background-color: #5863fa;
+ border-radius: 10%;
+ padding: 20px;
+ margin: 60px;
+}
+.InnerCard {
+ background-color: #f3f2ef;
+ padding : 20px 50px;
+ width : 60%;
+ border-radius: 10px;
+}
+
+@media only screen and (max-width: 780px) {
+ .InnerCard {
+  width : 90%;
+ }
+}
+@media only screen and (max-width: 440px) {
+ .InnerCard {
+  width : 100%;
+  padding: 5px ;
+ }
+ .OuterCard {
+  padding: 15px;
+  margin: 0px;
+ }
+}
 /* 
 .question-name {
  grid-column: 1 / span 3;

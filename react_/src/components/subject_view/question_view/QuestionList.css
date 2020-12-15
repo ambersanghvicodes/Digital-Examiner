@@ -1,23 +1,32 @@
 .questions {
- display:flex;
- flex-wrap: wrap;
- justify-content: center;
- padding: 5px 10px;
- margin: 60px 60px;
- background: #B993D6;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #8CA6DB, #B993D6);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #8CA6DB, #B993D6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
- /* Grandienta.io */
- /* UIgradient */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px 10px;
+  margin: 50px 50px;
+  background: #ececec; /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(to right, #CFDEF3, #E0EAFC); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: -1px 2px 28px -3px rgba(0, 0, 0, 0.53);
+  -webkit-box-shadow: -1px 2px 28px -3px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: -1px 2px 28px -3px rgba(0, 0, 0, 0.53);
+  /* UIgradient */
 }
-
+/* h1 {
+  color: #000;
+  text-shadow: #fff 2px 0px 1px, #fff 2px 0px 1px, #fff 2px 0px 1px,
+    #fff 0px 0px 1px, #fff 0px 0px 1px, #fff 0px 0px 1px;
+  padding-top: 10px;
+  font-weight: bolder;
+  -webkit-font-smoothing: antialiase;
+} */
 @media only screen and (max-width: 728px) {
- .questions {
-  margin: 40px 20px;
- }
+  .questions {
+    margin: 40px 20px;
+  }
 }
 @media only screen and (max-width: 400px) {
- .questions {
-  margin: 40px 0px;
- }
+  .questions {
+    margin: 40px 0px;
+  }
 }

@@ -1,0 +1,30 @@
+.sltd {
+ display: grid;
+ justify-items: start;
+ padding-bottom: 5px;
+}
+
+.question_no {
+ grid-row: 1;
+ grid-column: 1;
+ /* width: 10px; */
+ justify-self: start;
+}
+
+.sltd_question {
+ grid-row : 1;
+ word-break: break-all;
+ justify-self: start;
+ grid-column: 2;
+}
+.sltd_diagram {
+ grid-row : 1 / span 2 ;
+ grid-column: 3;
+ justify-self: start;
+ height: 90px;
+}
+.sltd_mark {
+ grid-row: 2;
+ grid-column: 2;
+ justify-self: start;
+}

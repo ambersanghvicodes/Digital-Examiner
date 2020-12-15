@@ -1,0 +1,6 @@
+.home_outerbox {
+ height:350px;
+ width: 100%;
+ background-color: red;
+ background-image: url('./home-background.jpg');
+}

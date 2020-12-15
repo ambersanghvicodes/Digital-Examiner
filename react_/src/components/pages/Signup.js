@@ -73,6 +73,8 @@ class RegistrationForm extends React.Component {
     }
     return (
       <div style={{ padding: "10% 2px 10% 2px", backgroundColor: "skyblue" }}>
+        <br/><br/>
+
         <center>
           {this.props.userLoggedIn ? (
             <h1>You are already logged in.</h1>

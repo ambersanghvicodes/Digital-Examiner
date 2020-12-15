@@ -6,6 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import 'font-awesome/css/font-awesome.min.css';
 
 import reducer from "./components/store/reducers/auth";
 

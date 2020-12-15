@@ -1,0 +1,222 @@
+* {
+  scroll-behavior: smooth;
+}
+.grid-container {
+  display: grid;
+  align-items: center;
+  justify-content: space-around;
+  grid-gap: 10px;
+  grid-auto-flow: row;
+  border: 2px solid rgb(168, 162, 162);
+  padding: 10px;
+  background-color: #E4DBBF;
+  color: #c74509;
+  padding: 20px 20px;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 5px 10px 3px rgba(55, 90, 50, 0.68);
+  -moz-box-shadow: 0px 5px 10px 3px rgba(55, 90, 50, 0.68);
+  box-shadow: 0px 5px 10px 3px rgba(55, 90, 50, 0.68);
+}
+.head {
+  color: #001c50;
+  font-weight: bolder;
+  padding: 10px 0;
+  border: 5px solid rgb(37, 90, 62);
+  border-image: linear-gradient(
+    to right,
+    #E4DBBF 25%,
+    rgb(37, 90, 62) 25%,
+    rgb(37, 90, 62) 75%,
+    rgba(108, 219185, 141, 0) 75%
+  );
+  border-image-slice: 1;
+}
+.add-question {
+  grid-row: 1;
+  grid-column: 1;
+  justify-self: center;
+  align-items: center;
+}
+
+.select {
+  justify-self: center;
+  grid-row: 1;
+  grid-column: 3;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.select-institution {
+  grid-row: 1;
+  justify-self: center;
+  grid-column: 5;
+  word-wrap: break-word;
+}
+.add-question-image {
+  grid-row: 2;
+  justify-self: center;
+  grid-column: 1;
+}
+.arrow {
+  grid-row: 2;
+  justify-self: center;
+  grid-column: 2;
+  width: max-content;
+}
+.select-image {
+  justify-self: center;
+  grid-row: 2;
+  grid-column: 3;
+}
+.arrow2 {
+  grid-row: 2;
+  justify-self: center;
+  grid-column: 4;
+}
+
+.select-institution-image {
+  justify-self: center;
+  grid-row: 2;
+  grid-column: 5;
+}
+
+.add-question-text {
+  grid-row: 3;
+  grid-column: 1;
+  justify-self: center;
+  justify-items: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.select-pattern-text {
+  grid-row: 3;
+  justify-self: center;
+  grid-column: 3;
+  font-size: medium;
+  font-weight: bold;
+}
+.select-institution-text {
+  grid-row: 3;
+  justify-self: center;
+  grid-column: 5;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.add-question {
+  grid-row: 1;
+  grid-column: 1;
+  justify-self: center;
+  align-items: center;
+}
+
+.select {
+  justify-self: center;
+  grid-row: 1;
+  grid-column: 3;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.select-institution {
+  grid-row: 1;
+  justify-self: center;
+  grid-column: 5;
+  word-wrap: break-word;
+}
+.add-question-image {
+  grid-row: 2;
+  justify-self: center;
+  grid-column: 1;
+}
+.arrow {
+  grid-row: 2;
+  justify-self: center;
+  grid-column: 2;
+  width: max-content;
+}
+.select-image {
+  justify-self: center;
+  grid-row: 2;
+  grid-column: 3;
+}
+.arrow2 {
+  grid-row: 2;
+  justify-self: center;
+  grid-column: 4;
+}
+
+.select-institution-image {
+  justify-self: center;
+  grid-row: 2;
+  grid-column: 5;
+}
+
+.add-question-text {
+  grid-row: 3;
+  grid-column: 1;
+  justify-self: center;
+  justify-items: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.select-pattern-text {
+  grid-row: 3;
+  justify-self: center;
+  grid-column: 3;
+  font-size: medium;
+  font-weight: bold;
+}
+.select-institution-text {
+  grid-row: 3;
+  align-self: center;
+  grid-column: 5;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.hr {
+  grid-row: 4;
+  grid-column: 1 / span 5;
+  border: white groove 3px;
+  width: 100%;
+}
+.df_level {
+  grid-row: 5;
+  grid-column: 2 / span 3;
+  align-self: center;
+  justify-self: center;
+}
+.df_level_image {
+  grid-row: 6;
+  grid-column: 2 / span 3;
+  height: 150px;
+  min-width: 500px;
+}
+.df_level_txt {
+  grid-row: 7;
+  grid-column: 2 / span 3;
+  align-self: center;
+  justify-self: center;
+  font-size: medium;
+  font-weight: bold;
+}
+.pdf-btn {
+  background-color: rgb(241, 25, 72);
+  justify-content: space-between;
+  font-size: 100px;
+  padding: 14px 22px;
+  border: 2px rgb(229, 173, 173) solid;
+  border-radius: 10px;
+  -webkit-box-shadow: -2px 2px 15px 6px rgba(77, 65, 65, 0.75);
+  -moz-box-shadow: -2px 2px 15px 6px rgba(65, 52, 52, 0.75);
+  box-shadow: -2px 2px 15px 6px rgba(140, 115, 115, 0.75);
+}
+button > .pdf {
+  font-size: x-large;
+  padding: 16px 10px;
+  margin-top: 20px;
+  border-left: 2px solid rgb(36, 21, 21);
+  margin-left : 10px ;
+  /* background-color: darkmagenta; */
+}

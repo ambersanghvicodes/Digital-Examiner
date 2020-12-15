@@ -28,6 +28,8 @@ class UserDetails extends Component {
   render() {
     return (
       <div>
+        <br/><br/><br/>
+
         {this.props.userLoggedIn ? (
           <React.Fragment>
             {console.log(this.state.user_details)}

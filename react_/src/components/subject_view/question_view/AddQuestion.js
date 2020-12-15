@@ -3,6 +3,10 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import "./AddQuestion.css";
 import FormData from "form-data";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 export default class AddQuestion extends Component {
   state = {
     selectedFile: null,
@@ -29,7 +33,7 @@ export default class AddQuestion extends Component {
     this.setState({ [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value, this.state.difficulty_level);
   };
-  
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -46,11 +50,12 @@ export default class AddQuestion extends Component {
     // Details of the uploaded file
     console.log("sss", this.state);
     console.log("formdata", formData);
+
     // configurations
     const config = {
       headers: {
         "content-type": "multipart/form-data",
-        authorization: `Token ${token}`,
+        authorization: `Bearer ${token}`,
       },
     };
     let idi = this.props.subject_id;
@@ -69,14 +74,72 @@ export default class AddQuestion extends Component {
         console.log("newlist", newList);
         this.props.updateQuestion(newList);
       })
-      .catch((err) => {
-        this.setState({ err: err.data });
-      });
+      .catch((err) => console.log(err));
   };
   render() {
     return (
-      <div>
-        <form className="question-form" onSubmit={this.onSubmit}>
+      <div className="OuterCard">
+        <div className="InnerCard">
+          <center>
+            <h3 style={{color:'darkorange',}}>Enter Question details...</h3>
+          </center>
+          <Form onSubmit={this.onSubmit}>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Add Question: </Form.Label>
+              <Form.Control
+                type="text"
+                name="question"
+                placeholder="Add Question here..."
+                value={this.state.name}
+                onChange={this.onChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Mark of Question</Form.Label>
+              <Form.Control
+                type="number"
+                name="mark"
+                placeholder="Add Mark of the Question..."
+                value={this.state.name}
+                onChange={this.onChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label>Select difficulty level: </Form.Label>
+              <Form.Control
+                as="select"
+                name="difficulty_level"
+                value={this.state.difficulty_level}
+                onChange={this.onChange}
+              >
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Difficult</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.File
+                id="exampleFormControlFile1"
+                label="Input Diagram file if any"
+                onChange={this.onFileChange}
+              />
+            </Form.Group>
+            <center>
+            <Button variant="dark" className="button" type="submit">
+              Submit
+            </Button>{' '}
+            <Button variant="danger" onClick={this.props.setFalse} >
+              Close Form
+            </Button>
+            </center>
+          </Form>
+        </div>
+      </div>
+    );
+  }
+}
+{
+  /* <form className="question-form" onSubmit={this.onSubmit}>
           <center>
             <div className="question-name">
               <label>
@@ -123,8 +186,5 @@ export default class AddQuestion extends Component {
               Submit
             </Button>
           </center>
-        </form>
-      </div>
-    );
-  }
+        </form> */
 }
