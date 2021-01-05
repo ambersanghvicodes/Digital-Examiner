@@ -42,7 +42,7 @@ export default class Institutions extends Component {
   };
   submitInstitution = (institute_name, address, city, state, country) => {
     let data = {
-      name1: institute_name,
+      name: institute_name,
       address: address,
       city: city,
       state: state,

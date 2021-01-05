@@ -110,7 +110,7 @@ export default class SelectedQuestions extends Component {
           </Modal.Header>
           <Modal.Body>
             <center>
-              <h3>Institute Name: {this.props.institute.name1}</h3>
+              <h3>Institute Name: {this.props.institute.name}</h3>
               <h6>
                 Address : {this.props.institute.address},{" "}
                 {this.props.institute.state}, {this.props.institute.city},{" "}

@@ -29,7 +29,7 @@ export default class AddPattern extends Component {
       window.alert("Number  of Questions cannot be 0. ");
     } else if (this.state.nos === 0) {
       window.alert("Number of Sections cannot be 0.");
-    } else if (this.state.nos < this.state.noq) {
+    } else if (this.state.noq < this.state.nos) {
       window.alert(
         "Number of Questions cannot be less than number of Sections."
       );
