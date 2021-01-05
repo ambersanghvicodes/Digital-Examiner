@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from .serializers import (
     UserSerializer, SubjectSerializer, QuestionSerializer, UserEditSerializer,
-    UserCreateSerializer, TodoSerializer
+    UserCreateSerializer, TodoSerializer, PatternSerializer,InstituteSerializer
 )
 from rest_framework.parsers import FileUploadParser, MultiPartParser 
 
 from rest_framework import generics
-from .models import  Subject, Questions, Todo
+from .models import  Subject, Questions, Todo, Pattern, Institute
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -111,7 +111,6 @@ class QuestionList(generics.ListCreateAPIView):
     authentication_classes = (OAuth2Authentication,)
     permission_classes = [TokenHasReadWriteScope,]
 
-
     def get_queryset(self):
         pk = self.kwargs.get(self.lookup_url_kwarg)
         questions = Questions.objects.all().filter(user = self.request.user)
@@ -133,28 +132,33 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-
-
-
-
-
-
-# class SnippetList(generics.ListCreateAPIView):
-#     serializer_class = SnippetSerializer
-#     authentication_classes = (SessionAuthentication, BasicAuthentication)
-#     permission_classes = (IsAuthenticated,)
-
-#     def get_queryset(self):
-#         return Snippet.objects.all().filter(owner = self.request.user)
-
-
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
+class PatternList(generics.ListCreateAPIView):
+    serializer_class = PatternSerializer
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
+    def get_queryset(self):
+        return Pattern.objects.all().filter(user = self.request.user)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
     
+class PatternDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Pattern.objects.all()
+    serializer_class = PatternSerializer
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
 
 
-# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Snippet.objects.all()
-#     serializer_class = SnippetSerializer
-#     authentication_classes = (SessionAuthentication, BasicAuthentication)
-#     permission_classes = (IsAuthenticated ,IsAuthenticatedAndOwner)
+class InstituteList(generics.ListCreateAPIView):
+    serializer_class = InstituteSerializer
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
+    def get_queryset(self):
+        return Institute.objects.all().filter(user = self.request.user)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+    
+class InstituteDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Institute.objects.all()
+    serializer_class = InstituteSerializer
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]

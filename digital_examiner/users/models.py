@@ -38,3 +38,23 @@ class Todo(models.Model):
 
   def __str__(self):
     return self.title
+
+
+class Pattern(models.Model):
+  title = models.CharField(max_length=200, default='')
+  nos = models.IntegerField(default=0)
+  noq=models.IntegerField(default=0)
+  tm=models.IntegerField(default=0)
+  mark_array = models.CharField(max_length=200, default='')
+  question_array = models.CharField(max_length=200, default='')
+  user= models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None)
+
+class Institute(models.Model):
+  name= models.CharField(max_length=200, default='')
+  address = models.TextField(max_length=500, default='')
+  city = models.CharField(max_length=100, default='')
+  state = models.CharField(max_length=100, default='')
+  country = models.CharField(max_length=100, default='')
+  user= models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None)
+
+

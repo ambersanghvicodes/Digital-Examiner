@@ -12,7 +12,10 @@ urlpatterns = [
     path('subjects/<int:pk>/questions/<int:id>/', views.QuestionDetail.as_view()),
     path('todo/', views.TodoList.as_view()),
     path('todo/<int:pk>/', views.TodoEdit.as_view()),
-
+    path('patterns/', views.PatternList.as_view()),
+    path('patterns/<int:pk>/', views.PatternDetail.as_view()),
+    path('institutions/', views.InstituteList.as_view()),
+    path('institutions/<int:pk>/', views.InstituteDetail.as_view()),
   ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

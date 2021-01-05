@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Subject, Questions,Todo, UserDetail
+from .models import Subject, Questions,Todo, UserDetail, Pattern,Institute
 
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,3 +62,13 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questions
         fields = ['id','question', 'diagram1', 'mark', 'difficult_level']
+
+class PatternSerializer(serializers.ModelSerializer) : 
+    class Meta:
+        model = Pattern
+        fields=['id', 'title', 'nos','tm', 'noq', 'mark_array', 'question_array']
+
+class InstituteSerializer(serializers.ModelSerializer) : 
+    class Meta:
+        model = Institute
+        fields = ['id','name', 'address', 'city', 'state', 'country']
