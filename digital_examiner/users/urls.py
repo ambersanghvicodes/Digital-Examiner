@@ -16,6 +16,8 @@ urlpatterns = [
     path('patterns/<int:pk>/', views.PatternDetail.as_view()),
     path('institutions/', views.InstituteList.as_view()),
     path('institutions/<int:pk>/', views.InstituteDetail.as_view()),
+    path('institutions/', views.InstituteList.as_view()),
+    path('pdf_view/',views.QPDFWrite.as_view())
   ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

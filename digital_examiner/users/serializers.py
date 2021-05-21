@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Subject, Questions,Todo, UserDetail, Pattern,Institute
+from .models import Subject, Questions,Todo, UserDetail, Pattern,Institute, QPDF
 
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,3 +72,8 @@ class InstituteSerializer(serializers.ModelSerializer) :
     class Meta:
         model = Institute
         fields = ['id','name', 'address', 'city', 'state', 'country']
+
+class QPDFSerializer(serializers.ModelSerializer) : 
+    class Meta:
+        model = QPDF
+        fields = ['__all__']

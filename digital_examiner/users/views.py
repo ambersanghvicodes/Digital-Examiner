@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from .serializers import (
     UserSerializer, SubjectSerializer, QuestionSerializer, UserEditSerializer,
-    UserCreateSerializer, TodoSerializer, PatternSerializer,InstituteSerializer
+    UserCreateSerializer, TodoSerializer, PatternSerializer,InstituteSerializer, QPDFSerializer
 )
 from rest_framework.parsers import FileUploadParser, MultiPartParser 
 
 from rest_framework import generics
-from .models import  Subject, Questions, Todo, Pattern, Institute
+from .models import  Subject, Questions, Todo, Pattern, Institute, QPDF
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -162,3 +162,14 @@ class InstituteDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = InstituteSerializer
     authentication_classes = (OAuth2Authentication,)
     permission_classes = [TokenHasReadWriteScope,]
+
+class QPDFWrite(generics.ListCreateAPIView):
+    queryset = QPDF.objects.all()
+    serializer_class = QPDFSerializer
+    authentication_classes = (OAuth2Authentication,)
+    permission_classes = [TokenHasReadWriteScope,]
+
+    def post(self, request):
+        data = request.data['data']
+        print(data)
+        return Response([])

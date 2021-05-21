@@ -58,3 +58,8 @@ class Institute(models.Model):
   user= models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None)
 
 
+class QPDF(models.Model):
+  name  = models.CharField(max_length=200, default='')
+  pdf = models.FileField(upload_to = 'pdfs')
+  subject  = models.ForeignKey(Subject, on_delete=models.CASCADE)
+  date_time  = models.DateTimeField(auto_now_add=True)
