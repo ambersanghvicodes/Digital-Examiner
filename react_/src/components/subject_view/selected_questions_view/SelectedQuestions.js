@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
 import SelectedQuestion from "./SelectedQuestion";
+import jsPDF from "jspdf";
 import "./SelectedQuestions.css";
 export default class SelectedQuestions extends Component {
   state = {
@@ -16,39 +17,29 @@ export default class SelectedQuestions extends Component {
       window.alert("Not enough number of questions in the database.");
       onHide();
     }
-    console.log(pattern, questions, institute, df_level);
     // assmebling marks & queston in a array
     let a = pattern.mark_array.split("Z");
     let b = pattern.question_array.split("Z");
     for (let i = 0; i < a.length; i++) {
       mark_question[i] = [a[i], b[i]];
     }
-    console.log(mark_question);
     let f = false;
     var lst = [];
     for (var i = 0; i < a.length; i++) {
-      // console.log(mark_question[i][0]);
       var aa = [
         ...questions.filter(
           (question) => question.mark.toString() === mark_question[i][0]
         ),
       ];
-      console.log(aa);
       if (aa.length >= mark_question[i][1]) {
         lst.push(aa);
-        // this.setState(((state)=> ({
-        //   qsOfType : [...state.qsOfType, aa]
-        // })))
-        console.log("OK", aa);
       } else {
         const msg = `Not sufficient question in database for ${mark_question[i][0]} mark. Please add Some .`;
         window.alert(msg);
-        // console.log("ERRR", i);
         onHide();
         break;
       }
     }
-    console.log('lst',lst)
     let lst_selected = [];
     // lst = lst.sort(() => 0.5 - Math.random());
     for (var i = 0; i < lst.length; i++) {
@@ -58,11 +49,9 @@ export default class SelectedQuestions extends Component {
           lst1.push(lst[i][j]);
         }
       }
-      console.log("lst1 --easy", lst1, mark_question[i][1]);
       if (lst1.length >= mark_question[i][1]) {
         const shuffled = lst1.sort(() => 0.5 - Math.random());
         lst_selected.push(shuffled.slice(0, mark_question[i][1]));
-        console.log('if statement',shuffled.slice(0, mark_question[i][1]));
       } else {
         var k = mark_question[i][1] - lst1.length;
         var j = 0;
@@ -75,11 +64,9 @@ export default class SelectedQuestions extends Component {
           j++;
         }
         const shuffled = lst1.sort(() => 0.5 - Math.random());
-        console.log('else statement',shuffled.slice(0, lst[i].length), )
         lst_selected.push(shuffled.slice(0, lst[i].length));
       }
     }
-    console.log(lst_selected);
     this.setState({ selectedQuestions: lst_selected });
   };
   // displayQuestions = () => {
@@ -90,9 +77,68 @@ export default class SelectedQuestions extends Component {
   //     }))
   //   }
   // }
+  generatePDF = () => {
+    var doc = jsPDF();
+    const { selectedQuestions } = this.state;
+    let line = 20;
+
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const pageRatio = pageWidth / pageHeight;
+    doc.setTextColor("red");
+    doc.setFontSize(25);
+    doc.text(23, line, this.props.institute.name);
+    doc.setTextColor("black");
+    doc.setFontSize(15);
+    line += 10;
+    const address ='                       ' +
+      this.props.institute.address +
+      " " +
+      ", " +
+      this.props.institute.state +
+      " " +
+      ", " +
+      this.props.institute.country;
+    doc.text(25, line, address);
+    line += 10;
+    const subject_line = `Subject : ${this.props.subject_name}                                                         Total marks : ${this.props.pattern.tm}`;
+    doc.text(15, line, subject_line);
+    line += 10;
+    doc.setLineWidth(1);
+    doc.line(20, line, 200, line);
+
+    line += 10;
+
+    console.log(selectedQuestions);
+    var page = 200;
+    for (var i = 0; i < selectedQuestions.length; i++) {
+      line += 10;
+      doc.text(20, parseInt(line), `Section ${i + 1}`);
+      for (var j = 0; j < selectedQuestions[i].length; j++) {
+        const text = `Q.${(j + 1).toString()}      ${
+          selectedQuestions[i][j].question
+        }`;
+        line += 10;
+        console.log("q", line);
+        doc.text(20, parseInt(line), text);
+        doc.text(180, parseInt(line), selectedQuestions[i][j].mark.toString());
+        if (line > page) {
+          doc.addPage();
+          line = 10;
+          // page += 90
+          // doc.set_page(2)
+        }
+      }
+      line += 10;
+      if (i === selectedQuestions.length - 1) {
+        doc.save(`${this.props.subject_name}_digitalexaminer`);
+      }
+    }
+  };
   render() {
     return (
       <div>
+        {console.log(this.props.pattern)}
         <Modal
           size="lg"
           show={true}
@@ -110,6 +156,8 @@ export default class SelectedQuestions extends Component {
           </Modal.Header>
           <Modal.Body>
             <center>
+              <Button onClick={this.generatePDF}>Download PDF</Button>
+              <h1 style={{ color: "red" }}>Selected Questions</h1>
               <h3>Institute Name: {this.props.institute.name}</h3>
               <h6>
                 Address : {this.props.institute.address},{" "}
@@ -126,7 +174,6 @@ export default class SelectedQuestions extends Component {
                 </div>
               ))}
             </center>
-            {console.log(this.state.selectedQuestions)}
           </Modal.Body>
         </Modal>
       </div>

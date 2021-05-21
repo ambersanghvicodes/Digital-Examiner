@@ -6,15 +6,16 @@
 .OuterCard {
  display: flex;
  justify-content: center;
- background-color: #5863fa;
+ /* background-color: #5863fa; */
  border-radius: 10%;
  padding: 20px;
  margin: 60px;
 }
 .InnerCard {
- background-color: #f3f2ef;
+ background-color: #5863fa;
  padding : 20px 50px;
  width : 60%;
+ color: white;
  border-radius: 10px;
 }
 

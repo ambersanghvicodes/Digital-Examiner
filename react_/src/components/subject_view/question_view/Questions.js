@@ -12,6 +12,15 @@ import Patterns from "../pattern_view/Patterns";
 import Institutions from "../institution_view/Institutions";
 import SelectedQuestions from "../selected_questions_view/SelectedQuestions";
 import "./Questions.css";
+import Lottie from "react-lottie";
+// Images
+import Select from "./Select.png";
+import df_level from "./df_level.png";
+import AQ from "./AddQuestion.png";
+import IT from "./institution.png";
+// Animations
+import pdfData from "../../../Animation/pdf-symbol.json";
+
 class Questions extends Component {
   state = {
     questions: [],
@@ -151,13 +160,11 @@ class Questions extends Component {
   };
   generate_pdf = () => {
     if (this.state.selectedPattern === "None") {
-      window.alert('Select a pattern first.')
-    }
-    else if (this.state.selectedInst === 'None'){
-      window.alert('Select a institution first.')
-    }
-    else{
-      this.setState({generateQuestions : true})
+      window.alert("Select a pattern first.");
+    } else if (this.state.selectedInst === "None") {
+      window.alert("Select a institution first.");
+    } else {
+      this.setState({ generateQuestions: true });
     }
   };
   render() {
@@ -176,142 +183,171 @@ class Questions extends Component {
                 </h5>
               </center>
               <br />
-              <div
-                className="child grid-container"
-                style={{ fontSize: "85px" }}
-              >
-                <h3 className="head add-question">Add Question</h3>
-                <h3 className="head select">Select a Pattern</h3>
-                <h3 className="head select-institution">
-                  <center className="">
-                    Select a Institute
-                    <br /> Name
-                  </center>
-                </h3>
-                <img
-                  className="add-question-image"
-                  src={require("./AddQuestion.png")}
-                />
-                <i className="fa fa-arrow-right arrow"></i>{" "}
-                <img
-                  className="select-image"
-                  src={require("./Select.png")}
-                  style={{ height: "185px" }}
-                />
-                <i className="fa fa-arrow-right arrow2"></i>{" "}
-                <img
-                  className="select-institution-image"
-                  src={require("./institution.png")}
-                  style={{ height: "150px" }}
-                />
-                <div className="add-question-text">
+              <div className="qt-container">
+                <div className="qt-1">
+                  <div className="qt-part1">
+                    <h3 className="head">Add Question</h3>
+                    <center>
+                      <img className="aqi" src={AQ} />
+                    </center>
+                    <div className="add-question-text">
+                      <center>
+                        <p>
+                          Number of Questions added :{" "}
+                          {this.state.questions.length}
+                        </p>
+                        <a href="#qus_section">
+                          <Button
+                            onClick={() =>
+                              this.setState({
+                                addQuestions: true,
+                                showQuestions: false,
+                              })
+                            }
+                            variant="success"
+                          >
+                            Add Question
+                          </Button>
+                        </a>{" "}
+                        <a href="#qus_section">
+                          <Button
+                            onClick={() =>
+                              this.setState({
+                                addQuestions: false,
+                                showQuestions: true,
+                              })
+                            }
+                            variant="primary"
+                          >
+                            Show Questions
+                          </Button>
+                        </a>
+                      </center>
+                    </div>
+                  </div>
                   <center>
-                    <p>
-                      Number of Questions added : {this.state.questions.length}
-                    </p>
-                    <a href="#qus_section">
-                      <Button
-                        onClick={() =>
-                          this.setState({
-                            addQuestions: true,
-                            showQuestions: false,
-                          })
-                        }
-                        variant="success"
-                      >
-                        Add Question
-                      </Button>
-                    </a>{" "}
-                    <a href="#qus_section">
-                      <Button
-                        onClick={() =>
-                          this.setState({
-                            addQuestions: false,
-                            showQuestions: true,
-                          })
-                        }
-                        variant="primary"
-                      >
-                        Show Questions
-                      </Button>
-                    </a>
+                    <i className="fa qt-part1  fa-arrow-right arrow"></i>{" "}
                   </center>
-                </div>
-                <div className="select-pattern-text">
-                  <center>
-                    Selected Pattern : {this.state.selectedPattern} <br />
-                    <br />
-                    <Button
-                      variant="success"
-                      onClick={() => this.setState({ showPatterns: true })}
-                    >
-                      {" "}
-                      Select Pattern{" "}
-                    </Button>
-                  </center>
-                </div>
-                <div className="select-institution-text">
-                  <center>
-                    Selected Institution : <br /> {this.state.selectedInst}{" "}
-                    <br />
-                    <Button
-                      variant="success"
-                      onClick={() => this.setState({ showInstitutions: true })}
-                    >
-                      Select Institution
-                    </Button>
-                  </center>
+                  <div className="qt-part2">
+                    <h3 className="head select">Select a Pattern</h3>
+                    <center>
+                      <img
+                        className="select-image"
+                        src={Select}
+                        style={{ height: "185px", justifySelf: "center" }}
+                      />
+                    </center>
+                    <div className="select-pattern-text">
+                      <center>
+                        Selected Pattern : {this.state.selectedPattern} <br />
+                        <br />
+                        <Button
+                          variant="success"
+                          onClick={() => this.setState({ showPatterns: true })}
+                        >
+                          {" "}
+                          Select Pattern{" "}
+                        </Button>
+                      </center>
+                    </div>
+                  </div>
                 </div>
                 <hr className="hr" />
-                <div className="df_level">
-                  <h3 className="head">Select Difficulty Level</h3>
-                </div>
-                <img
-                  className="df_level_image"
-                  src={require("./df_level.png")}
-                />
-                <div className="df_level_txt">
-                  Selected Difficult level : {this.state.df_level} <br />
-                  <Row
-                    style={{
-                      justifyItems: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Col>Change : </Col>
-                    <Form.Group as={Col} controlId="formGridState">
-                      <Form.Control
-                        as="select"
+
+                <div className="qt-1">
+                  <div className="qt-part1">
+                    <h3 className="head">
+                      <center className="">
+                        Select a Institute
+                        <br /> Name
+                      </center>
+                    </h3>
+                    <center>
+                      <img
+                        className="select-institution-image"
+                        src={IT}
+                        style={{ height: "150px" }}
+                      />
+                    </center>
+                    <div className="select-institution-text">
+                      <center>
+                        Selected Institution : <br /> {this.state.selectedInst}{" "}
+                        <br />
+                        <Button
+                          variant="success"
+                          onClick={() =>
+                            this.setState({ showInstitutions: true })
+                          }
+                        >
+                          Select Institution
+                        </Button>
+                      </center>
+                    </div>
+                  </div>
+                  <center>
+                    <i className="fa qt-part1  fa-arrow-right arrow"></i>{" "}
+                  </center>
+                  <div className="qt-part2">
+                    <div className="df_level">
+                      <h3 className="head">Select Difficulty Level</h3>
+                    </div>
+                    <img className="df_level_image" src={df_level} />
+                    <div className="df_level_txt">
+                      Selected Difficult level : {this.state.df_level} <br />
+                      <Row
                         style={{
-                          margin: "15px 0 0 -25px",
-                          backgroundColor: "#334e68",
-                          color: "white",
+                          justifyItems: "center",
+                          alignItems: "center",
                         }}
-                        defaultValue={this.state.df_level}
-                        onChange={this.onChange}
                       >
-                        <option style={{ backgroundColor: "#334e68" }}>
-                          Easy
-                        </option>
-                        <option style={{ backgroundColor: "#334e68" }}>
-                          Medium
-                        </option>
-                        <option style={{ backgroundColor: "#334e68" }}>
-                          Hard
-                        </option>
-                      </Form.Control>
-                    </Form.Group>
-                  </Row>
+                        <Col>Change : </Col>
+                        <Form.Group as={Col} controlId="formGridState">
+                          <Form.Control
+                            as="select"
+                            style={{
+                              margin: "10px 0 0 -150px",
+                              backgroundColor: "#334e68",
+                              color: "white",
+                            }}
+                            defaultValue={this.state.df_level}
+                            onChange={this.onChange}
+                          >
+                            <option style={{ backgroundColor: "#334e68" }}>
+                              Easy
+                            </option>
+                            <option style={{ backgroundColor: "#334e68" }}>
+                              Medium
+                            </option>
+                            <option style={{ backgroundColor: "#334e68" }}>
+                              Hard
+                            </option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Row>
+                    </div>
+                  </div>
                 </div>
               </div>
               <br />
               <center>
                 <button
                   style={{ fontSize: "xx-large" }}
-                  className=" pdf-btn fa fa-file-pdf-o"
+                  className="pdf-btn "
                   onClick={this.generate_pdf}
                 >
-                  {"  "} <span className="pdf">Generate PDF</span>
+                  <Lottie
+                    options={{
+                      loop: true,
+                      autoplay: true,
+                      animationData: pdfData,
+                      rendererSettings: {
+                        preserveAspectRatio: "xMidYMid slice",
+                      },
+                    }}
+                    height={100}
+                    width={100}
+                  />{" "}
+                  <span>Generate PDF</span>
                 </button>
               </center>
               <br />
@@ -321,6 +357,7 @@ class Questions extends Component {
                 {this.state.generateQuestions ? (
                   <SelectedQuestions
                     pattern={this.state.pattern}
+                    subject_name = {this.state.subject_name}
                     questions={this.state.questions}
                     institute={this.state.institute}
                     df_level={this.state.df_level}

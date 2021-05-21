@@ -23,13 +23,13 @@ export default class AddPattern extends Component {
     e.preventDefault();
     if (this.state.title === "") {
       window.alert("Enter a title for pattern.");
-    } else if (this.state.tm === 0) {
+    } else if (parseInt(this.state.tm) === 0) {
       window.alert("Total marks cannot be zero.");
-    } else if (this.state.noq === 0) {
+    } else if (parseInt(this.state.noq) === 0) {
       window.alert("Number  of Questions cannot be 0. ");
-    } else if (this.state.nos === 0) {
+    } else if (parseInt(this.state.nos) === 0) {
       window.alert("Number of Sections cannot be 0.");
-    } else if (this.state.noq < this.state.nos) {
+    } else if (parseInt(this.state.noq) < parseInt(this.state.nos)) {
       window.alert(
         "Number of Questions cannot be less than number of Sections."
       );
@@ -120,7 +120,7 @@ export default class AddPattern extends Component {
                   <Form.Label column xs="auto">
                     Number of Questions:
                   </Form.Label>
-                  <Col xs="auto">
+                  <Col xs={3}>
                     <Form.Control
                       type="number"
                       placeholder="Add Number of Questions "

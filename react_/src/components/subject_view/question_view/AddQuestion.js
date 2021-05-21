@@ -72,16 +72,33 @@ export default class AddQuestion extends Component {
         let newQuestion = res.data;
         let newList = [...this.props.questions, newQuestion];
         console.log("newlist", newList);
+
         this.props.updateQuestion(newList);
       })
+      .then(() =>
+        this.setState({
+          selectedFile: null,
+          difficulty_level: "Easy",
+          question: "",
+          mark: "",
+        })
+      )
       .catch((err) => console.log(err));
+  };
+  clear = () => {
+    this.setState({
+      selectedFile: null,
+      difficulty_level: "Easy",
+      question: "",
+      mark: "",
+    });
   };
   render() {
     return (
       <div className="OuterCard">
         <div className="InnerCard">
           <center>
-            <h3 style={{color:'darkorange',}}>Enter Question details...</h3>
+            <h3 style={{ color: "#ff8e52" }}>Enter Question details...</h3>
           </center>
           <Form onSubmit={this.onSubmit}>
             <Form.Group controlId="exampleForm.ControlInput1">
@@ -125,66 +142,13 @@ export default class AddQuestion extends Component {
               />
             </Form.Group>
             <center>
-            <Button variant="dark" className="button" type="submit">
-              Submit
-            </Button>{' '}
-            <Button variant="danger" onClick={this.props.setFalse} >
-              Close Form
-            </Button>
+              <Button variant="success" className="button" type="submit">
+                Submit
+              </Button>{" "}
             </center>
           </Form>
         </div>
       </div>
     );
   }
-}
-{
-  /* <form className="question-form" onSubmit={this.onSubmit}>
-          <center>
-            <div className="question-name">
-              <label>
-                Add Your Question :
-                <input
-                  type="text"
-                  name="question"
-                  placeholder="Add Question..."
-                  value={this.state.name}
-                  onChange={this.onChange}
-                />
-              </label>
-            </div>
-            <div>
-              <label>
-                Mark of Question:
-                <input
-                  type="text"
-                  name="mark"
-                  placeholder="Add Mark of the Question..."
-                  value={this.state.name}
-                  onChange={this.onChange}
-                />
-              </label>
-            </div>
-            <label>
-              Select difficulty Level:{" "}
-              <select
-                className="select"
-                name="difficulty_level"
-                value={this.state.difficulty_level}
-                onChange={this.onChange}
-              >
-                <option value="Easy">Easy</option>
-                <option value="Medium">Medium</option>
-                <option value="Diffucult">Difficult</option>
-              </select>
-            </label>
-            <br />
-            <input type="file" onChange={this.onFileChange} className="file" />
-            {console.log(this.state.selectedFile)}
-            <br />
-            <Button variant="info" className="button" type="submit">
-              Submit
-            </Button>
-          </center>
-        </form> */
 }

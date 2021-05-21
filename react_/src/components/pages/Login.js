@@ -18,6 +18,9 @@ import Col from "react-bootstrap/Col";
 import { Redirect } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Card from "react-bootstrap/Card";
+import Lottie from "react-lottie";
+import animationData from "../../Animation/loading-animation.json";
+import loginData from "../../Animation/login.json";
 import "./Login.css";
 
 class NormalLoginForm extends React.Component {
@@ -58,7 +61,9 @@ class NormalLoginForm extends React.Component {
     if (this.props.error) {
       errorMessage = (
         <Alert style={{ textAlign: "center" }} variant="danger">
-          {this.props.error.response.data.error_description}
+          {this.props.error
+            ? this.props.error.response.data.error_description
+            : "Error Establishing Connection . Try Again"}
         </Alert>
       );
     }
@@ -77,14 +82,13 @@ class NormalLoginForm extends React.Component {
       <div>
         {console.log(this.props)}
         <br />
-        <br />
         {this.props.isAuthenticated ? (
           <React.Fragment>
-            {window.alert("Already Logged in. Visit home")}
+            {window.alert("Login Successful. Visit Home .")}
             <Redirect to="/" />
           </React.Fragment>
         ) : (
-          <>
+          <div className="two-col">
             <div className="outer-box">
               <div className="inner-box">
                 <center>
@@ -96,10 +100,18 @@ class NormalLoginForm extends React.Component {
                   {this.props.loading ? (
                     <React.Fragment>
                       <h1 style={{ color: "white" }}>Logging In...</h1>
-                      <br />
-                      <Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                      </Spinner>
+                      <Lottie
+                        options={{
+                          loop: true,
+                          autoplay: true,
+                          animationData: animationData,
+                          rendererSettings: {
+                            preserveAspectRatio: "xMidYMid slice",
+                          },
+                        }}
+                        height={250}
+                        width={250}
+                      />
                     </React.Fragment>
                   ) : (
                     <>
@@ -181,44 +193,27 @@ class NormalLoginForm extends React.Component {
                   )}
                 </center>
               </div>
+              <div className="second-col">
+                <Lottie
+                  options={{
+                    loop: true,
+                    autoplay: true,
+                    animationData: loginData,
+                    rendererSettings: {
+                      preserveAspectRatio: "xMidYMid slice",
+                    },
+                  }}
+                  height={400}
+                  width={400}
+                />
+              </div>
             </div>
-            {/* <div
-              style={{ padding: "10% 2px 10% 2px", backgroundColor: "skyblue" }}
-            >
-              <center>
-                <Card bg={"dark"} text={"white"} className="mb-2 login-card">
-                  <Card.Body>
-                    {errorMessage}
-                    {this.props.loading ? (
-                      <React.Fragment>
-                        <h1 style={{ color: "white" }}>Logging In...</h1>
-                        <br />
-                        <Spinner animation="border" role="status">
-                          <span className="sr-only">Loading...</span>
-                        </Spinner>
-                      </React.Fragment>
-                    ) : (
-                      <div>
-                        <h1 className="heading" style={{ color: "white" }}>
-                          Login Here
-                        </h1>
-                        <br />
-
-                        <br />
-                      </div>
-                    )}
-                  </Card.Body>
-                </Card>
-              </center>
-            </div> */}
-          </>
+          </div>
         )}
       </div>
     );
   }
 }
-
-// const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 const mapStateToProps = (state) => {
   console.log("loginstate", state);
@@ -240,137 +235,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NormalLoginForm);
-
-// import { Form, Input, Button } from 'antd';
-// const layout = {
-//   labelCol: {
-//     span: 8,
-//   },
-//   wrapperCol: {
-//     span: 16,
-//   },
-// };
-// const tailLayout = {
-//   wrapperCol: {
-//     offset: 8,
-//     span: 16,
-//   },
-// };
-
-// const Demo = () => {
-//   const onFinish = (values) => {
-//     console.log('Success:', values);
-//   };
-
-//   const onFinishFailed = (errorInfo) => {
-//     console.log('Failed:', errorInfo);
-//   };
-
-//   return (
-
-//     </Form>
-//   );
-// };
-
-// ReactDOM.render(<Demo />, mountNode);
-
-// {this.props.loading ? (
-//   <div>
-//     <h1>Logging In...</h1>
-//     <br />
-//     <Spinner animation="border" role="status">
-//       <span className="sr-only">Loading...</span>
-//     </Spinner>
-//   </div>
-// ) : (
-//   <div>
-//     <h1>Login Here</h1>
-//     <br />
-//     <Form onSubmit={this.handleSubmit}>
-//       <center style={{ paddingLeft: "30%" }}>
-//         <Form.Group as={Row} controlId="formBasicUsername">
-//           <Form.Label column sm={2}>
-//             Username:{" "}
-//           </Form.Label>
-//           <Col style={{ marginLeft: "-3%" }} sm={5}>
-//             <Form.Control
-//               type="text"
-//               name="username"
-//               value={this.state.values.username}
-//               onChange={this.inputChanged}
-//               placeholder="Enter your Username"
-//             />
-//           </Col>
-//         </Form.Group>
-
-//         <Form.Group as={Row} controlId="formBasicPassword">
-//           <Form.Label column sm={2}>
-//             Password:{" "}
-//           </Form.Label>
-//           <Col style={{ marginLeft: "-3%" }} sm={5}>
-//             <Form.Control
-//               name="password"
-//               type="password"
-//               onChange={this.inputChanged}
-//               value={this.state.values.password}
-//               placeholder="Password"
-//             />
-//           </Col>
-//         </Form.Group>
-//       </center>
-//       <Button variant="primary" type="submit">
-//         Submit
-//       </Button>
-//       {"   "}
-//       or {"  "}{" "}
-//       <Link to="/signup" style={{ color: "red" }}>
-//         Register
-//       </Link>
-//     </Form>
-//   </div>
-// )}
-
-// <Form onSubmit={this.handleSubmit}>
-//                           <center>
-//                             <Form.Group
-//                               as={Row}
-//                               className="justify-content-md-center"
-//                               controlId="formBasicUsername"
-//                             >
-//                               <Form.Label>Username:{"  "}</Form.Label>
-//                               <Col xs lg="6">
-//                                 <Form.Control
-//                                   type="text"
-//                                   name="username"
-//                                   value={this.state.values.username}
-//                                   onChange={this.inputChanged}
-//                                   placeholder="Enter your Username"
-//                                 />
-//                               </Col>
-//                             </Form.Group>
-
-//                             <Form.Group
-//                               as={Row}
-//                               className="justify-content-md-center"
-//                               controlId="formBasicPassword"
-//                             >
-//                               <Form.Label>Password: </Form.Label>
-//                               <Col xs lg="6">
-//                                 <Form.Control
-//                                   name="password"
-//                                   type="password"
-//                                   onChange={this.inputChanged}
-//                                   value={this.state.values.password}
-//                                   placeholder="Password"
-//                                 />
-//                               </Col>
-//                             </Form.Group>
-//                           </center>
-//                           <Button
-//                             variant="primary"
-//                             className="login-btn"
-//                             type="submit"
-//                           >
-//                             Login
-//                           </Button>
-//                         </Form>
