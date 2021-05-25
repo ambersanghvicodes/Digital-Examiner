@@ -16,15 +16,8 @@ import Subjects from "./components/subject_view/Subjects";
 import Questions from "./components/subject_view/question_view/Questions";
 
 class App extends Component {
-  state = {
-    todos: [],
-  };
-
   componentDidMount() {
-    axios
-      .get("http://127.0.0.1:8000/api_view/todo/")
-      .then((res) => this.setState({ todos: res.data }))
-      .then(this.props.onTryAutoSignup());
+    this.props.onTryAutoSignup();
   }
 
   render() {
@@ -32,27 +25,27 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={HomePage} />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <div className="container">
               <Route
                 exact
                 path="/login"
                 render={(props) => <Login {...this.props} />}
               />
-
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/SignIn" component={SignIn} />
               <Route exact path="/signup" component={RegistrationForm} />
               <Route exact path="/user_details" component={UserDetails} />
               <Route exact path="/subjects" component={Subjects} />
+
               <Route
                 exact
                 path="/subjects/:subjectId/questions/"
                 component={Questions}
               />
-            </Switch>
-          </div>
+            </div>
+          </Switch>
         </div>
       </Router>
     );
